@@ -104,6 +104,15 @@ if settings.SITEMAP_ENABLED:
             content_type="application/xml")),
     )
 
+#Markdown blogs
+if settings.MARKDOWN_BLOG_ENABLED:
+    urlpatterns += patterns('',
+        url(r'^blog/?$', 'syte.views.blog.markdown_blog_index'),
+        url(r'^blog/posts/(?P<slug>\S+)?$',
+            'syte.views.blog.markdown_blog_post'),
+    )
+
+#Statics: Hacky for now... fix this later...
 urlpatterns += patterns('',
     (r'^robots\.txt$', TemplateView.as_view(template_name="robots.txt")),
     (r'^favicon\.ico$', RedirectView.as_view(url="/static/imgs/favicon.ico")),

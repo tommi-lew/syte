@@ -7,3 +7,5 @@ pybars==0.0.4
 python-twitter==1.0
 python-linkedin==4.0
 dj-static==0.0.5
+rauth==0.4.17
+Markdown

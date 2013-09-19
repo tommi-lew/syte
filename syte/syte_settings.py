@@ -139,6 +139,25 @@ LINKEDIN_USER_SECRET = '[ENTER YOUR LINKED IN USER SECRET HERE]'
 
 SITEMAP_ENABLED = False
 
+#Markdown Blog Integration
+MARKDOWN_BLOG_ENABLED = True
+MARKDOWN_EXTENSIONS = ('.markdown', '.mdown', '.mkdn', '.md', '.mkd', '.mdwn',
+                       '.mdtxt', '.mdtext', '.text')
+
+# Load up our list of articles for the home page
+# This is done here to prevent reading all the available files each time the
+# home page is requested.  This will only run when the application first boots
+# up and imports from this module.
+if MARKDOWN_BLOG_ENABLED:
+    import os
+    from utils import list_articles
+
+    MARKDOWN_ARTICLES_DIR = os.path.join(os.path.dirname(__file__), 'articles')
+    MARKDOWN_PAGES_DIR = os.path.join(os.path.dirname(__file__), 'pages')
+    MARKDOWN_FRONT_PAGE = 'FrontPage.md'
+    MARKDOWN_ARTICLES = list_articles(MARKDOWN_ARTICLES_DIR,
+                                      MARKDOWN_EXTENSIONS)
+
 if DEPLOYMENT_MODE == 'dev':
     SITE_ROOT_URI = 'http://127.0.0.1:8000/'
     ALLOWED_HOSTS = ['*']
